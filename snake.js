@@ -1,21 +1,23 @@
 import { getInputDirection } from "./input.js"
 
-// how many times the snake moves per second
-export const SNAKE_SPEED = 5
-const snakeBody = [{ x: 11, y: 11}]
+export const SNAKE_SPEED = 5 // how many times the snake moves per second
+const snakeBody = [{ x: 11, y: 11}] // initialize the starting position to the center of the grid
 let newSegments = 0
 
+// purpose: update the snake's location and length
 export function update(){
     addSegments()
     const inputDirection = getInputDirection()
-    for (let i = snakeBody.length - 2; i >= 0; i--){
-        snakeBody[i+1] = { ...snakeBody[i]}
+    for (let i = snakeBody.length - 2; i >= 0; i--){ // take the position of a given segment and the segment after that is going to move into the new position
+        // we start at length - 2 (second to last square) because the bottom of our snake is going to disappear anyways
+        snakeBody[i+1] = { ...snakeBody[i]} // just shifting our entire snake forward
     }
     snakeBody[0].x += inputDirection.x
     snakeBody[0].y += inputDirection.y
 
 }
 
+// purpose: draw the game board
 export function draw(gameBoard){
     snakeBody.forEach(segment => { 
         const snakeElement = document.createElement('div')
@@ -50,6 +52,7 @@ function equalPositions(pos1, pos2){
 
 }
 
+// purpose: once the snake has eaten food, add on the correct amount of squares
 function addSegments(){
     for(let i = 0; i < newSegments; i++){
         snakeBody.push({...snakeBody[snakeBody.length - 1] })
