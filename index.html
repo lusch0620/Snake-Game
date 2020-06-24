@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake</title>
+    <style>
+        body{
+            /*  We'll never be scrolling so we don't need to use min-height. 
+                - vh and vw stand for viewport height and viewport width, which
+                    allows us to specify sizes in terms of percentages of the 
+                    viewport width/height
+                - display: flex allows us to create a flex container that allows
+                    the content to change in relation to the size of the window
+                - justify-content(JC) and align-items(AI) are different in that 
+                    JC works with items in relation to the x-axis and AI in
+                    relation to the y-axis
+            */
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            background-color:black;
+        }
+        #game-board{
+            /*  game-board creates the gridded background on which we will play snake
+                - vmin is a length unit that allows us to specify the width or 
+                    height in terms of eprcentages of the viewport width/height
+                - display:grid is css' way of creating a grid
+                - repeat(#squares, fractional unit): an efficient way to create x
+                    amount of squares
+            */
+            background-color:#CCC;
+            width: 100vmin;
+            height: 100vmin;
+            display: grid;
+            grid-template-rows: repeat(21, 1fr);
+            grid-template-columns: repeat(21, 1fr);
+        }
+        .snake{
+            /*  .snake will be the square that moves around the grid collecting food
+                - hsl stands for hue, saturation, and lightness; it's just 
+                    another way to denote color
+                - 0.25vmin allows for the size of the border to be scaled in
+                    relation to the size of the window
+            */
+            background-color: hsl(200, 100%, 50%);
+            border: .25vmin solid black;
+        }
+        .food{
+            /* .food are our food bits that the snake will eat
+                - refer to above
+            */
+            background-color: hsl(50, 100%, 50%);
+            border: .25vmin solid black;
+        }
+    </style>
+    <!--defer means that the source will load after our body type="module"
+        because we will use import and export statements to have multiple js
+        files so we can break apart logic into different files to make it
+        easier to work with-->
+    <script src="game.js" defer type="module"></script>
+</head>
+<body>
+    <!--we use html and css instead of canvas because html has css grids which is perfect for snake-->
+    <div id="game-board"></div>
+</body>
+</html>
