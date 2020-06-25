@@ -14,7 +14,6 @@ export function update(){
     }
     snakeBody[0].x += inputDirection.x
     snakeBody[0].y += inputDirection.y
-
 }
 
 // purpose: draw the game board
